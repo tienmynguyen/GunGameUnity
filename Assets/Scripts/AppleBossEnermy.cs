@@ -1,28 +1,21 @@
 
 using UnityEngine;
+using System.Collections;
 
-public class BossEnemy : Enemy
+public class AppleBossEnermy : Enemy
 {
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject bulletPrefabs;
+    [SerializeField] private GameObject AppleBossV2;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float speedBullet = 20f;
     [SerializeField] private float speedBulletTron = 10f;
-    [SerializeField] private float hpValue = 100f;
     [SerializeField] private GameObject miniEnemy;
-    [SerializeField] private float CD = 2f;
+    [SerializeField] private float CD = 1f;
     private float nextSkillTime = 0f;
 
 
     [SerializeField] private GameObject banana;
-    protected override void Start()
-    {
-        if (gameManager == null)
-        {
-            gameManager = FindObjectOfType<GameManager>();
-        }
-        base.Start();
-    }
+
     protected override void Update()
     {
         base.Update();
@@ -33,11 +26,8 @@ public class BossEnemy : Enemy
     }
     protected override void Die()
     {
-        Instantiate(banana, transform.position, Quaternion.identity);
+        Instantiate(AppleBossV2, transform.position, Quaternion.identity);
         base.Die();
-        gameManager.BossDefeat();
-
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -62,28 +52,51 @@ public class BossEnemy : Enemy
 
     private void BandanThuong()
     {
+        StartCoroutine(Ban3Vien());
+    }
+
+    private IEnumerator Ban3Vien()
+    {
         if (player != null)
         {
             Vector3 directionToPlayer = player.transform.position - firePoint.position;
             directionToPlayer.Normalize();
-            GameObject bullet = Instantiate(bulletPrefabs, firePoint.position, Quaternion.identity);
-            EnemyBullet enemyBullet = bullet.AddComponent<EnemyBullet>();
-            enemyBullet.setMovemenDirection(directionToPlayer * speedBullet);
+
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject bullet = Instantiate(bulletPrefabs, firePoint.position, Quaternion.identity);
+                EnemyBullet enemyBullet = bullet.AddComponent<EnemyBullet>();
+                enemyBullet.setMovemenDirection(directionToPlayer * speedBullet);
+
+                yield return new WaitForSeconds(0.1f); // khoảng cách giữa các phát bắn
+            }
         }
     }
     private void BandanVongTron()
     {
+        StartCoroutine(BanVongTronLienTuc());
+    }
+
+    private IEnumerator BanVongTronLienTuc()
+    {
         const int bulletCount = 12;
         float angleStep = 360f / bulletCount;
-        for (int i = 0; i < bulletCount; i++)
+
+        for (int j = 0; j < 3; j++)  // Lặp lại 3 lần
         {
-            float angle = i * angleStep;
-            Vector3 bulletDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0);
-            GameObject bullet = Instantiate(bulletPrefabs, transform.position, Quaternion.identity);
-            EnemyBullet enemyBullet = bullet.AddComponent<EnemyBullet>();
-            enemyBullet.setMovemenDirection(bulletDirection * speedBulletTron);
+            for (int i = 0; i < bulletCount; i++)
+            {
+                float angle = i * angleStep;
+                Vector3 bulletDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0);
+                GameObject bullet = Instantiate(bulletPrefabs, transform.position, Quaternion.identity);
+                EnemyBullet enemyBullet = bullet.AddComponent<EnemyBullet>();
+                enemyBullet.setMovemenDirection(bulletDirection * speedBulletTron);
+            }
+
+            yield return new WaitForSeconds(0.1f);  // Delay giữa các vòng bắn
         }
     }
+
 
     private void HoiMau(float hpAmount)
     {
@@ -95,16 +108,10 @@ public class BossEnemy : Enemy
     {
         Instantiate(miniEnemy, transform.position, Quaternion.identity);
     }
-    private void DichChuyen()
-    {
-        if (player != null)
-        {
-            transform.position = player.transform.position;
-        }
-    }
+
     private void chonskill()
     {
-        int randomskill = Random.Range(0, 5);
+        int randomskill = Random.Range(0, 6);
         switch (randomskill)
         {
             case 0:
@@ -114,14 +121,16 @@ public class BossEnemy : Enemy
                 BandanVongTron();
                 break;
             case 2:
-                HoiMau(hpValue);
+                SinhMiniEnemy();
                 break;
             case 3:
                 SinhMiniEnemy();
                 break;
             case 4:
-                DichChuyen();
+                SinhMiniEnemy();
                 break;
+
+
         }
     }
     private void sudungskill()

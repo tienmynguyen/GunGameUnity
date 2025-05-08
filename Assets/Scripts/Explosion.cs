@@ -16,6 +16,10 @@ public class Explosion : MonoBehaviour
         {
             enemy.TakeDamge(damage);
         }
+        if (collision.CompareTag("Apple"))
+        {
+            enemy.TakeDamge(damage);
+        }
     }
     public void DestroyExplosion()
     {

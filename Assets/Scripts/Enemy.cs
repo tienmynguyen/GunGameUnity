@@ -12,6 +12,8 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField] protected float enterDamage = 10f;
     [SerializeField] protected float stayDamage = 1f;
+    [SerializeField] private GameObject Coin;
+    
     protected virtual void Start()
     {
         player = FindAnyObjectByType<Player>();
@@ -50,6 +52,7 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         Destroy(gameObject);
+        Instantiate(Coin, transform.position, Quaternion.identity);
     }
     protected void UpdateHpBar()
     {

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BasicEnemy : Enemy
 {
+
     [SerializeField] private GameObject energyObject;
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -31,6 +32,6 @@ public class BasicEnemy : Enemy
             GameObject energy = Instantiate(energyObject, transform.position, Quaternion.identity);
             Destroy(energy, 5f);
         }
-        base.Die();
+        Destroy(gameObject);
     }
 }

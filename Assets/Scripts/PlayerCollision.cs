@@ -15,11 +15,21 @@ public class PlayerCollision : MonoBehaviour
         }
         if (collision.CompareTag("Banana"))
         {
-            gameManager.Wingame();
+            gameManager.AddBanana();
+            gameManager.OpenChest();
+
+            Destroy(collision.gameObject);
         }
         if (collision.CompareTag("Energy"))
         {
             gameManager.AddEnergy();
+            Destroy(collision.gameObject);
+            audioManager.PlayEnergySound();
+        }
+        if (collision.CompareTag("Coin"))
+        {
+            Player player = GetComponent<Player>();
+            gameManager.AddCoin();
             Destroy(collision.gameObject);
             audioManager.PlayEnergySound();
         }
