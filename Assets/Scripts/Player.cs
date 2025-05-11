@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     [SerializeField] private float maxHp = 100f;
-    private float currentHp;
+    [SerializeField] private float currentHp;
     [SerializeField] private Image hpBar;
     [SerializeField] private GameManager gameManager;
 
@@ -23,6 +23,15 @@ public class Player : MonoBehaviour
     private Vector2 lastMoveDir;
 
 
+    [SerializeField] private GameObject skillBallPrefab;
+    [SerializeField] private Transform firePoint; // Vị trí trước mặt Player
+    [SerializeField] private float maxScale = 3f;
+    [SerializeField] private float growSpeed = 1f;
+
+    private GameObject chargingBall;
+    private float chargeStartTime;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,7 +41,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
+        InvokeRepeating("RegenerateHealth", 1f, 1f);
 
         currentHp = maxHp;
         UpdateHpBar();
@@ -61,6 +70,30 @@ public class Player : MonoBehaviour
         {
             gameManager.PauseGameMenu();
         }
+
+
+        if (gameManager.energyBallSkill == true)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                StartChargingSkill();
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                ChargeSkill();
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                ReleaseSkill();
+            }
+        }
+
+    }
+    private void RegenerateHealth()
+    {
+        Heal(1f); // Hồi 1 HP mỗi lần gọi
     }
     void MovePlayer()
     {
@@ -118,7 +151,7 @@ public class Player : MonoBehaviour
         dashTimeLeft = dashDuration;
         lastDashTime = Time.time;
         rb.velocity = lastMoveDir * dashSpeed;
-        animator.SetTrigger("dash"); // nếu có animation dash
+        // animator.SetTrigger("dash"); // nếu có animation dash
     }
 
     private void Dash()
@@ -130,5 +163,47 @@ public class Player : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
     }
-    
+
+
+
+    void StartChargingSkill()
+    {
+        chargingBall = Instantiate(skillBallPrefab, firePoint.position, Quaternion.identity);
+        chargingBall.transform.localScale = Vector3.one * 0.1f;
+        chargeStartTime = Time.time;
+    }
+
+    void ChargeSkill()
+    {
+        if (chargingBall == null) return;
+
+        float scale = Mathf.Min(maxScale, chargingBall.transform.localScale.x + growSpeed * Time.deltaTime);
+        chargingBall.transform.localScale = Vector3.one * scale;
+
+        // Quả cầu luôn nằm trước mặt Player
+        chargingBall.transform.position = firePoint.position;
+    }
+
+    void ReleaseSkill()
+    {
+        if (chargingBall == null) return;
+
+        float chargeTime = Time.time - chargeStartTime;
+        float damage = chargingBall.transform.localScale.x * 10f;
+
+        // Tính hướng tới chuột
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        Vector3 dir = (mousePos - chargingBall.transform.position).normalized;
+
+        // Thêm Rigidbody2D để bay
+        Rigidbody2D rb = chargingBall.GetComponent<Rigidbody2D>();
+        rb.velocity = dir * 10f;
+
+        //Gán damage
+        chargingBall.GetComponent<EnergyBallSkill>().SetDamage(damage);
+        Destroy(chargingBall, 5f);
+        chargingBall = null;
+    }
+
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 05bade096c2bc394c84a2d0ee8df4d97
+guid: d6924b822f0efd7438f5a1935eae2aaf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -102,7 +102,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Windows Store Apps
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -114,7 +114,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Explosion_0
+      name: Energyball_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 945f109cbcc8d604dbf6fff16e5dfc16
-      internalID: 232155385
+      spriteID: 24bb113c33b3fda41b40f2cf1925efac
+      internalID: -354466427
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion_1
+      name: Energyball_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 24
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +164,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62c518b2e4fead04dbaf3514906b72db
-      internalID: 1412114544
+      spriteID: 7907668fc871fa148a1acf87ec7d1822
+      internalID: -284699271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion_2
+      name: Energyball_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 48
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +185,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 667bd1bee09da7449ba28efdc9098bd8
-      internalID: 1401267545
+      spriteID: a087e2a7beed9d04894b06b9c5c59531
+      internalID: 1690604085
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion_3
+      name: Energyball_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 72
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5be6f5288ef087448aeb1bbd2dbe2147
-      internalID: 1449683611
+      spriteID: c2adb4fbe79b34c46b18e37373be68d8
+      internalID: -1316110645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion_4
+      name: Energyball_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 96
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +227,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fe4a487a32c7194e8190ab4fcda3910
-      internalID: 89301144
+      spriteID: 30c59a677e6c8b6499e2015381f9ebd6
+      internalID: 553077917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion_5
+      name: Energyball_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 120
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,8 +248,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbb68b2c3115daa40a42f014d73f5a2c
-      internalID: -1315918723
+      spriteID: 4add6063af473a946af90534476710d0
+      internalID: -2043188540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Energyball_6
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c249c2acda111864f9236aa7afe29238
+      internalID: -623149152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Energyball_7
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4031717e32757e5458f5f63dd34b6124
+      internalID: -245289621
       vertices: []
       indices: 
       edges: []
@@ -265,12 +307,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Explosion_0: 232155385
-      Explosion_1: 1412114544
-      Explosion_2: 1401267545
-      Explosion_3: 1449683611
-      Explosion_4: 89301144
-      Explosion_5: -1315918723
+      Energyball_0: -354466427
+      Energyball_1: -284699271
+      Energyball_2: 1690604085
+      Energyball_3: -1316110645
+      Energyball_4: 553077917
+      Energyball_5: -2043188540
+      Energyball_6: -623149152
+      Energyball_7: -245289621
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

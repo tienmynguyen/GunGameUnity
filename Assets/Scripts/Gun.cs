@@ -88,7 +88,7 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0) && currentAmmo > 0 && Time.time > nextShot)
+        if (Input.GetMouseButton(0) && currentAmmo > 0 && Time.time > nextShot)
         {
             nextShot = Time.time + shotDelay;
             Instantiate(bulletPredfabs, firePos.position, firePos.rotation);

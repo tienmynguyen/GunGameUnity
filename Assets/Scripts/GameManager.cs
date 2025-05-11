@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject winMenu;
     [SerializeField] private CinemachineVirtualCamera cam;
     [SerializeField] private TextMeshProUGUI currentCoin;
+    [SerializeField] private TextMeshProUGUI TextTopShopMenu;
 
 
     public bool dash = false; //cd 5S, dich chuyen 1 doan ngan
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+        TextTopShopMenu.SetText("");
         AppleBoss.SetActive(false);
         currentEnergy = 0;
         currentBanana = 0;
@@ -204,13 +205,43 @@ public class GameManager : MonoBehaviour
         switch (skillId)
         {
             case 0:
-                dash = true;
+                if (dash == true)
+                {
+                    TextTopShopMenu.SetText("You already have this skill, please choose another skill.");
+                }
+                else
+                {
+                    dash = true;
+                    ResumeGame();
+                    TextTopShopMenu.SetText("");
+                }
+
                 break;
             case 1:
-                energyBallSkill = true;
+                if (energyBallSkill == true)
+                {
+                    TextTopShopMenu.SetText("You already have this skill, please choose another skill.");
+                }
+                else
+                {
+                    energyBallSkill = true;
+                    ResumeGame();
+                    TextTopShopMenu.SetText("");
+                }
+
                 break;
             case 2:
-                explosionSkill = true;
+                if (explosionSkill == true)
+                {
+                    TextTopShopMenu.SetText("You already have this skill, please choose another skill.");
+                }
+                else
+                {
+                    explosionSkill = true;
+                    ResumeGame();
+                    TextTopShopMenu.SetText("");
+                }
+
                 break;
         }
     }

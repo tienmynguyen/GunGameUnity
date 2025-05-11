@@ -33,6 +33,11 @@ public class BossEnemy : Enemy
     }
     protected override void Die()
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
         Instantiate(banana, transform.position, Quaternion.identity);
         base.Die();
         gameManager.BossDefeat();
